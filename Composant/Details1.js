@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import {
   View,
   Text,
@@ -9,29 +9,30 @@ import {
   Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { ApiContexts } from "../context/ApiProviderDetails";
+import { getImageUrl } from "../Api/getApi";
+// Assurez-vous que le chemin est correct
 
 const { width } = Dimensions.get("window");
 
-const images = [
-  require("../assets/maison.jpg"),
-  require("../assets/maison2.jpg"),
-  require("../assets/maison3.jpg"),
-];
-
 export default function Detail1() {
+  const { apiData } = useContext(ApiContexts);
+  
   const scrollRef = useRef<ScrollView>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
   // Auto scroll toutes les 3 secondes
   useEffect(() => {
     const interval = setInterval(() => {
-      const nextIndex = (currentIndex + 1) % images.length;
+      const nextIndex = (currentIndex + 1) % (apiData.autres_images ? JSON.parse(apiData.autres_images).length + 1 : 1);
       setCurrentIndex(nextIndex);
       scrollRef.current?.scrollTo({ x: nextIndex * width, animated: true });
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [currentIndex]);
+  }, [currentIndex, apiData]);
+
+  const images = [getImageUrl(apiData.image_principale), ...(apiData.autres_images ? JSON.parse(apiData.autres_images).map(getImageUrl) : [])];
 
   return (
     <View style={styles.container}>
@@ -49,14 +50,9 @@ export default function Detail1() {
           }}
         >
           {images.map((img, index) => (
-            <Image key={index} source={img} style={styles.image} />
+            <Image key={index} source={{ uri: img }} style={styles.image} />
           ))}
         </ScrollView>
-
-        {/* Bouton retour */}
-        <TouchableOpacity style={styles.backButton}>
-          <Icon name="arrow-left" size={20} color="#fff" />
-        </TouchableOpacity>
 
         {/* Bouton partage */}
         <TouchableOpacity style={styles.shareButton}>
@@ -79,19 +75,19 @@ export default function Detail1() {
 
       {/* Détails */}
       <View style={styles.details}>
-        <Text style={styles.title}>Maison à vendre</Text>
-        <Text style={styles.price}>3000$</Text>
+        <Text style={styles.title}>{apiData.statut ? "A vendre" : "A louer"} {apiData.typepropriete.nom_propriete}</Text>
+        <Text style={styles.price}>{apiData.prix}$</Text>
 
         <View style={styles.row}>
           <Icon name="map-marker" size={18} color="#0d6efd" />
           <Text style={styles.address}>
-            Av.Banunu, C/Matete, ville: Kinshasa
+            {apiData.avenue}, {apiData.quartier}, ville: {apiData.ville.nom_ville}
           </Text>
         </View>
 
         <View style={styles.statusContainer}>
           <Text style={[styles.status, { backgroundColor: "#ff7f0e", color: "#fff" }]}>
-            A vendre
+            {apiData.statut ? "A vendre" : "A louer"}
           </Text>
           <Text style={[styles.status, { borderColor: "#0d6efd", color: "#0d6efd" }]}>
             Disponible maintenant
@@ -114,14 +110,6 @@ const styles = StyleSheet.create({
     width: width,
     height: 250,
     resizeMode: "cover",
-  },
-  backButton: {
-    position: "absolute",
-    top: 20,
-    left: 15,
-    backgroundColor: "#0d6efd",
-    padding: 10,
-    borderRadius: 30,
   },
   shareButton: {
     position: "absolute",

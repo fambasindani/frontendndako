@@ -53,7 +53,7 @@ export default function Accueil1() {
     <View style={styles.container}>
       {/* Titre */}
       <View style={styles.header}>
-        <Text style={styles.title}>Propriétés ajouter récemment</Text>
+        <Text style={styles.title}>Propriétés ajoutées récemment</Text>
         <TouchableOpacity>
           <Text style={styles.seeMore}>Voir +</Text>
         </TouchableOpacity>

@@ -1,8 +1,10 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
 
 export default function Details2() {
+   
+
   return (
     <View style={styles.container}>
       {/* Description */}
