@@ -53,6 +53,9 @@ export default function MonMenu(props) {
       },
     },
 
+
+      
+
     {
       label: 'Ajouter une propriété',
       icon: 'building',
@@ -73,14 +76,17 @@ export default function MonMenu(props) {
       },
     },
 
-
-  /*   {
-      label: 'Détails',
+/* 
+    {
+      label: 'Liste',
       icon: 'info-circle',
       action: () => {
-        props.navigation.navigate('Details');
+        props.navigation.navigate('Liste');
       },
-    },  */
+    },
+ */
+
+   
 
 
     {
@@ -103,6 +109,7 @@ export default function MonMenu(props) {
 
     { label: 'Agents', icon: 'users', screen: 'Agents' },
     { label: 'Agences Immo', icon: 'cubes', screen: 'Agences Immo' },
+   // { label: 'Liste', icon: 'cubes', screen: 'ListScreen' },
 
     // Connexion seulement si non connecté
     //  ...(!isConnected ? [{ label: 'Connexion', icon: 'user', screen: 'Connexion' }] : []),

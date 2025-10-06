@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet } from "react-native"
-import Listflast from "./Listflast.js"
-import { Couleurs } from "./Couleurs.js"
+import Listflast from "../Composant/Listflast.js"
+import { Couleurs } from "../Composant/Couleurs.js"
 
 const SearchResultsScreen = ({ searchResults = [] }) => {
   const handlePropertyPress = (property) => {

@@ -1,7 +1,7 @@
 "use client"
 
 import { View, Image, Text, StyleSheet } from "react-native"
-import { Couleurs } from "./Couleurs.js"
+import { Couleurs } from "../Composant/Couleurs.js"
 
 const Logo = ({ size = "medium", showText = true, style }) => {
   const getLogoSize = () => {

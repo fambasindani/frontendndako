@@ -1,18 +1,43 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
+import { ApiContexts } from "../context/ApiProviderDetails";
+import Loader from '../Composant/Loader'; // Importer le Loader
 
 export default function Details2() {
-   
+  const { apiData } = useContext(ApiContexts);
+  const [nomcomplet, setnomcomplet] = useState(null);
+
+  useEffect(() => {
+    if (apiData) {
+      const prenom = apiData.utilisateur?.prenom ?? "nom inconnu";
+      const nomFamille = apiData.utilisateur?.nom_famille ?? "";
+      setnomcomplet(`${prenom} ${nomFamille}`);
+    }
+  }, [apiData]);
+
+  // Remplacez le loader ici
+  if (!apiData) {
+    return <Loader></Loader>;
+  }
+
+  console.log("apiData:", apiData); // Vérifiez la structure de apiData ici
+
+  function formatNumber(prix) {
+    if (prix < 1000) {
+      return prix.toString();
+    }
+    const suffix = prix < 1000000 ? 'k' : 'M';
+    const formattedNumber = (prix / (suffix === 'k' ? 1000 : 1000000)).toFixed(0);
+    return `${formattedNumber}${suffix}`;
+  }
 
   return (
     <View style={styles.container}>
       {/* Description */}
       <Text style={styles.sectionTitle}>Description</Text>
       <Text style={styles.description}>
-        Composition: 3 Chambres + Salon + 3 salle de bain + cuisine + Toilette
-        visiteur + 2 balcons + buanderie + parkin pour véhicules. Tout charge,
-        portail et sécurité absolue.
+        {apiData.description ?? "Description non disponible"}
       </Text>
 
       {/* Détails du bien */}
@@ -20,27 +45,29 @@ export default function Details2() {
       <View style={styles.detailBox}>
         <View style={styles.detailRow}>
           <Text style={styles.label}>Date d'ajout:</Text>
-          <Text style={styles.value}>15 août 2025</Text>
+          <Text style={styles.value}>
+            {new Date(apiData.date_enregistrement).toLocaleDateString() ?? "N/A"}
+          </Text>
         </View>
         <View style={styles.detailRow}>
           <Text style={styles.label}>Prix :</Text>
-          <Text style={styles.value}>3000 $</Text>
+          <Text style={styles.value}>${formatNumber(apiData.prix) ?? "N/A"}</Text>
         </View>
         <View style={styles.detailRow}>
           <Text style={styles.label}>Type :</Text>
-          <Text style={styles.value}>Maison</Text>
+          <Text style={styles.value}>{apiData.typepropriete?.nom_propriete ?? "N/A"}</Text>
         </View>
         <View style={styles.detailRow}>
           <Text style={styles.label}>Chambres :</Text>
-          <Text style={styles.value}>3</Text>
+          <Text style={styles.value}>{apiData.nombre_chambre ?? "N/A"}</Text>
         </View>
         <View style={styles.detailRow}>
           <Text style={styles.label}>Salle de bains :</Text>
-          <Text style={styles.value}>2</Text>
+          <Text style={styles.value}>{apiData.nombre_salle_de_bain ?? "N/A"}</Text>
         </View>
         <View style={styles.detailRow}>
           <Text style={styles.label}>Statut :</Text>
-          <Text style={styles.value}>A Vendre - Disponible</Text>
+          <Text style={styles.value}>{apiData.statut ? "À Vendre - Disponible" : "À Louer"}</Text>
         </View>
       </View>
 
@@ -50,7 +77,7 @@ export default function Details2() {
         <View style={styles.contactHeader}>
           <Icon name="user-circle" size={40} color="#888" />
           <View style={{ marginLeft: 10 }}>
-            <Text style={styles.contactName}>Schadrack Sina</Text>
+            <Text style={styles.contactName}>{nomcomplet ?? "nom inconnu"}</Text>
             <Text style={styles.contactRole}>Agent Immo</Text>
           </View>
         </View>
@@ -58,13 +85,13 @@ export default function Details2() {
         {/* Téléphone */}
         <View style={styles.contactRow}>
           <Icon name="phone" size={18} color="#0d6efd" />
-          <Text style={styles.contactText}> +243899786683 </Text>
+          <Text style={styles.contactText}>{apiData.utilisateur?.telephone ?? "Aucun num téléphone"}</Text>
         </View>
 
         {/* Email */}
         <View style={styles.contactRow}>
           <Icon name="envelope" size={18} color="#0d6efd" />
-          <Text style={styles.contactText}> schadrack@gmail.com </Text>
+          <Text style={styles.contactText}>{apiData.utilisateur?.email ?? "Aucun email"}</Text>
         </View>
 
         {/* WhatsApp */}

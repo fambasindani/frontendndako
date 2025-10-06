@@ -14,7 +14,7 @@ import axios from "axios"
 
 
 // URL de base de ton backend Laravel
-const BASE_URL = "http://10.124.182.117:8000";
+const BASE_URL = "http://192.168.88.126:8000";
 
 export const getApi = () => {
   return axios.create({

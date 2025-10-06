@@ -1,5 +1,5 @@
 import { View, Text, Image, StyleSheet, Dimensions, TouchableOpacity } from "react-native"
-import { Couleurs } from "./Couleurs"
+import { Couleurs } from "../Composant/Couleurs"
 
 const { width, height } = Dimensions.get("window")
 

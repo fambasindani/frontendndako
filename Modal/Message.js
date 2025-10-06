@@ -1,6 +1,6 @@
 import React from "react"
 import { View, Text, StyleSheet, Modal, TouchableWithoutFeedback, StatusBar, Platform } from "react-native"
-import { Couleurs } from "../Login/Couleurs"
+import { Couleurs } from "../Composant/Couleurs"
 
 const ModalPop = ({ visible, message, type = "success", onClose }) => {
     const colors = {

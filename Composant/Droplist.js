@@ -3,7 +3,7 @@
 import { useState } from "react"
 import { View, Text, TouchableOpacity, StyleSheet, Modal, FlatList } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
-import { Couleurs } from "./Couleurs.js"
+import { Couleurs } from "../Composant/Couleurs.js"
 
 const Droplist = ({
   label,

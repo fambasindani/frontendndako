@@ -4,10 +4,11 @@ import { useState, useMemo } from "react"
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, Image, ActivityIndicator } from "react-native"
 import { Ionicons } from "@expo/vector-icons"
 import _ from "lodash"
-import { Couleurs } from "./Couleurs.js"
+import { Couleurs } from "./Couleurs.js" 
 import Button from "./Button.js"
+import AsyncStorage from "@react-native-async-storage/async-storage"
 
-const Listflast = ({ properties = [], onPropertyPress, onEditPress, onDeletePress, itemsPerPage = 10 }) => {
+const ListflastTout = ({ properties = [], onPropertyPress, ActionMap, itemsPerPage = 50 }) => {
   const [displayedCount, setDisplayedCount] = useState(itemsPerPage)
   const [isLoading, setIsLoading] = useState(false)
 
@@ -28,6 +29,8 @@ const Listflast = ({ properties = [], onPropertyPress, onEditPress, onDeletePres
       setIsLoading(false)
     }, 1000)
   }
+
+    const userId =  AsyncStorage.getItem("userId");
 
   const getStatusColor = (status) => {
     if (status === "En vente" || status === "Vente") return Couleurs.secondary
@@ -72,14 +75,13 @@ const Listflast = ({ properties = [], onPropertyPress, onEditPress, onDeletePres
           onPress={() => onPropertyPress?.(item)}
           style={styles.detailButton}
         />
-
-        <TouchableOpacity style={styles.iconButton} onPress={() => onEditPress?.(item)}>
-          <Ionicons name="create-outline" size={20} color={Couleurs.primary} />
+            
+        <TouchableOpacity style={styles.iconButton} onPress={() => ActionMap?.(item)}>
+          <Ionicons name="location-outline" size={20} color={Couleurs.primary} />
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.iconButton} onPress={() => onDeletePress?.(item)}>
-          <Ionicons name="trash-outline" size={20} color={Couleurs.error} />
-        </TouchableOpacity>
+     
+
       </View>
     </TouchableOpacity>
   )
@@ -247,4 +249,4 @@ const styles = StyleSheet.create({
   },
 })
 
-export default Listflast
+export default ListflastTout

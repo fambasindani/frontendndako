@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 import ModalRechercheAgence from './ModalRechercheAgence';
-import { Couleurs } from './Couleurs'; // même fichier de couleurs
+import { Couleurs } from '../Composant/Couleurs'; // même fichier de couleurs
 
 export default function RechercheAgenceScreen() {
   const [modalVisible, setModalVisible] = useState(false);

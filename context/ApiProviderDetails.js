@@ -1,38 +1,124 @@
 import React, { createContext, useState, useEffect } from 'react';
 import { getApi } from '../Api/getApi';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Alert } from 'react-native';
 
 
 export const ApiContexts = createContext();
 
-export const ApiProviderDetails = ({ children , routeId}) => {
-    const [nom, setnom] = useState("Famba Ngoy");
- 
-     const [apiData, setApiData] = useState(null);
 
-   
+export default function DetailScreen() {
+  const route = useRoute();
+  const { id: routeId } = route.params || {};
 
-     
+  return (
+    <ApiProviderDetails routeId={routeId}>
+      <DetailContent />
+    </ApiProviderDetails>
+  );
+}
+
+// Provider
+export const ApiProviderDetails = ({ children, routeId }) => {
+  const [apiData, setApiData] = useState(null);
+
   useEffect(() => {
-        if (routeId) {
-            fetchApiData(); // Récupérez les données à l'aide de la fonction
-        }
-    }, [routeId]); // Dépendance sur routeId
-
     const fetchApiData = async () => {
-        try {
-            const token = await AsyncStorage.getItem("token");
-            if (!token) return; // Ne pas continuer si aucun token
-
-            const api = getApi(); // Obtenez l'instance Axios
-            const response = await api.get(`/api/proprieteall/${routeId}`, { // Concaténez routeId dans l'URL
-                headers: { Authorization: `Bearer ${token}` } // Ajoutez l'en-tête d'autorisation
-            });
-
-            setApiData(response.data); // Stockez les données dans l'état
-        } catch (error) {
-            console.error("Erreur lors de la récupération des données :", error.response?.data || error.message);
-        }
+      try {
+        const token = await AsyncStorage.getItem("token");
+        if (!token) return;
+        const api = getApi();
+        const response = await api.get(`/api/proprieteall/${routeId}`, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
+        setApiData(response.data);
+      } catch (err) {
+        console.error(err);
+      }
     };
+
+    if (routeId) fetchApiData();
+  }, [routeId]);
+
+  return (
+    <ApiContexts.Provider value={{ apiData }}>
+      {children}
+    </ApiContexts.Provider>
+  );
+};
+
+// DetailContent
+function DetailContent() {
+  const { apiData } = useContext(ApiContexts);
+  const [images, setImages] = useState([]);
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [nomComplet, setNomComplet] = useState("");
+  const scrollRef = useRef(null);
+
+  // ---- CHARGER IMAGES ----
+  useEffect(() => {
+    if (!apiData) return;
+
+    let autresImages = [];
+    try {
+      if (apiData.autres_images) {
+        if (typeof apiData.autres_images === "string") {
+          const parsed = JSON.parse(apiData.autres_images);
+          if (Array.isArray(parsed)) autresImages = parsed;
+        } else if (Array.isArray(apiData.autres_images)) {
+          autresImages = apiData.autres_images;
+        }
+      }
+    } catch (err) {
+      console.warn("Erreur parse autres_images:", err);
+    }
+
+    const newImages = [];
+    if (apiData.image_principale) newImages.push(getImageUrl(apiData.image_principale));
+    if (autresImages.length > 0)
+      newImages.push(...autresImages.map((img) => getImageUrl(img)));
+
+    setImages(newImages);
+  }, [apiData]);
+
+  // ---- NOM COMPLET VENDEUR ----
+  useEffect(() => {
+    if (!apiData) return;
+    const prenom = apiData.utilisateur?.prenom ?? "Nom";
+    const nomFamille = apiData.utilisateur?.nom_famille ?? "Inconnu";
+    setNomComplet(`${prenom} ${nomFamille}`);
+  }, [apiData]);
+
+  // ---- CARROUSEL AUTO-SCROLL ----
+  useEffect(() => {
+    if (images.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => {
+        const next = (prev + 1) % images.length;
+        scrollRef.current?.scrollTo({ x: next * width, animated: true });
+        return next;
+      });
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [images]);
+
+  // ---- RENDER ----
+  if (!apiData) {
+    // loader rendu **dans JSX**, mais tous les hooks ont déjà été appelés
+    return <Loader />;
+  }
+
+  return (
+    <ScrollView style={{ flex: 1, backgroundColor: "#fff" }}>
+      {/* Ton code de rendu ici */}
+      <Text>Détails du bien : {apiData.typepropriete?.nom_propriete}</Text>
+      <Text>Vendeur : {nomComplet}</Text>
+      {/* etc... */}
+    </ScrollView>
+  );
+}
+
+
 
 
 
@@ -57,12 +143,3 @@ export const ApiProviderDetails = ({ children , routeId}) => {
     }; */
 
 
-    return (
-       /*  <ApiContext.Provider value={{ apiData, nom, insertData, updateData }}> </ApiContext.Provider> */
-              <ApiContexts.Provider value={{ nom, routeId}}>
-                        {children}
-              </ApiContexts.Provider>
-          
-       
-    );
-};

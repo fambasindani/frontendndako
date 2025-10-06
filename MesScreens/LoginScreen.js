@@ -7,10 +7,12 @@ import { getApi } from "../Api/getApi.js";
 import ModalPop from "../Modal/Message.js";
 
 import { AuthContext } from "../context/AuthContext.js"; // Importez le contexte
-import Input from "../Login/Input.js";
-import Logo from "../Login/Logo.js";
-import { Couleurs } from "../Login/Couleurs.js";
-import Button from "../Login/Button.js";
+
+import Logo from "../Composant/Logo.js";
+import { Couleurs } from "../Composant/Couleurs.js";
+import Button from "../Composant/Button.js";
+import Input from "../Composant/Input.js";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -57,6 +59,12 @@ const LoginScreen = () => {
         await login(data.token, data.utilisateur); // Utilisez la fonction login du contexte
         setEmail("");
         setPassword("");
+
+        await AsyncStorage.setItem("token", data.token);
+        await AsyncStorage.setItem("userRole", data.utilisateur.role);
+        await AsyncStorage.setItem("userId", data.utilisateur.id.toString());
+        await AsyncStorage.setItem("userPrenom", data.utilisateur.prenom);
+        await AsyncStorage.setItem("userNom", data.utilisateur.nom_famille);
 
         setModalMessage("Connexion réussie !");
         setModalType("success");

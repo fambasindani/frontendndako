@@ -1,83 +1,44 @@
-import React, { useRef, useEffect, useState, useContext, createContext } from "react";
+import React, { useRef, useEffect, useState, useContext } from "react";
 import {
-  ScrollView,
   View,
   Text,
   Image,
   StyleSheet,
   TouchableOpacity,
+  ScrollView,
   Dimensions,
 } from "react-native";
 import Icon from "react-native-vector-icons/FontAwesome";
-import { useRoute } from "@react-navigation/native";
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getApi, getImageUrl } from "../Api/getApi";
-import Loader from "../Composant/Loader";
+import { ApiContexts } from "../context/ApiProviderDetails";
+import { getImageUrl } from "../Api/getApi";
+import Loader from '../Composant/Loader'; // Importer le Loader
 
 const { width } = Dimensions.get("window");
 
-// ---- CONTEXT ----
-export const ApiContexts = createContext();
-
-export const ApiProviderDetails = ({ children, routeId }) => {
-  const [apiData, setApiData] = useState(null);
-
-  useEffect(() => {
-    const fetchApiData = async () => {
-      try {
-       /*  const token = await AsyncStorage.getItem("token");
-        if (!token) return; */
-
-        const api = getApi();
-        const response = await api.get(`/api/proprieteall/${routeId}`, {
-    /*       headers: { Authorization: `Bearer ${token}` }, */
-        });
-
-        setApiData(response.data);
-      } catch (err) {
-        console.error("Erreur API:", err.response?.data || err.message);
-      }
-    };
-
-    if (routeId) fetchApiData();
-  }, [routeId]);
-
-  return <ApiContexts.Provider value={{ apiData }}>{children}</ApiContexts.Provider>;
-};
-
-// ---- DETAIL SCREEN ----
-export default function DetailScreen() {
-  const route = useRoute();
-  const { id: routeId } = route.params || {};
-
-  return (
-    <ApiProviderDetails routeId={routeId}>
-      <DetailContent />
-    </ApiProviderDetails>
-  );
-}
-
-// ---- DETAIL CONTENT ----
-function DetailContent() {
+export default function Detail() {
   const { apiData } = useContext(ApiContexts);
   const scrollRef = useRef(null);
-  const [images, setImages] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [nomComplet, setNomComplet] = useState("");
+  const [images, setImages] = useState([]);
+  const [nomcomplet, setnomcomplet] = useState(null);
 
-  // ---- FORMATAGE PRIX ----
-  const formatNumber = (prix) => {
-    if (!prix) return "N/A";
-    if (prix < 1000) return prix.toString();
-    const suffix = prix < 1000000 ? "k" : "M";
-    const formattedNumber = (prix / (suffix === "k" ? 1000 : 1000000)).toFixed(0);
+  // Vérifiez si apiData est disponible
+  if (!apiData) {
+    return <Loader />; // Afficher le Loader ici
+  }
+
+  // Formater le prix
+  function formatNumber(prix) {
+    if (prix < 1000) {
+      return prix.toString();
+    }
+    const suffix = prix < 1000000 ? 'k' : 'M';
+    const formattedNumber = (prix / (suffix === 'k' ? 1000 : 1000000)).toFixed(0);
     return `${formattedNumber}${suffix}`;
-  };
+  }
 
-  // ---- CHARGER IMAGES ----
+  // Charger les images
   useEffect(() => {
-    if (!apiData) return;
-
     let autresImages = [];
     try {
       if (apiData.autres_images) {
@@ -90,19 +51,24 @@ function DetailContent() {
       }
     } catch (err) {
       console.warn("Erreur parse autres_images:", err);
+      autresImages = [];
     }
 
     const newImages = [];
-    if (apiData.image_principale) newImages.push(getImageUrl(apiData.image_principale));
-    if (autresImages.length > 0)
+    if (apiData.image_principale) {
+      newImages.push(getImageUrl(apiData.image_principale));
+    }
+    if (autresImages.length > 0) {
       newImages.push(...autresImages.map((img) => getImageUrl(img)));
+    }
 
     setImages(newImages);
   }, [apiData]);
 
-  // ---- CARROUSEL AUTO-SCROLL ----
+  // Auto-scroll
   useEffect(() => {
     if (images.length <= 1) return;
+
     const interval = setInterval(() => {
       setCurrentIndex((prev) => {
         const next = (prev + 1) % images.length;
@@ -110,23 +76,20 @@ function DetailContent() {
         return next;
       });
     }, 3000);
+
     return () => clearInterval(interval);
   }, [images]);
 
-  // ---- NOM COMPLET VENDEUR ----
+  // Récupérer le nom complet de l'utilisateur
   useEffect(() => {
-    if (!apiData) return;
-    const prenom = apiData.utilisateur?.prenom ?? "Nom";
-    const nomFamille = apiData.utilisateur?.nom_famille ?? "Inconnu";
-    setNomComplet(`${prenom} ${nomFamille}`);
+    const prenom = apiData.utilisateur?.prenom ?? "nom inconnu";
+    const nomFamille = apiData.utilisateur?.nom_famille ?? "";
+    setnomcomplet(`${prenom} ${nomFamille}`);
   }, [apiData]);
 
-  // ---- RENDER ----
-  if (!apiData) return <Loader />; // Affiche le loader tant que les données ne sont pas disponibles
-
   return (
-    <ScrollView style={styles.container}>
-      {/* Carrousel */}
+    <ScrollView style={styles.container} contentContainerStyle={styles.scrollContent}>
+      {/* Partie 1 : Carrousel + infos principales */}
       <View style={styles.imageContainer}>
         <ScrollView
           ref={scrollRef}
@@ -145,7 +108,9 @@ function DetailContent() {
                 key={index}
                 source={{ uri: img }}
                 style={styles.image}
-                onError={(e) => console.warn("Image load error", e.nativeEvent)}
+                onError={(e) => {
+                  console.warn('Image load error', e.nativeEvent);
+                }}
               />
             ))
           ) : (
@@ -160,31 +125,35 @@ function DetailContent() {
           <Icon name="share-alt" size={20} color="#fff" />
         </TouchableOpacity>
 
-        {/* Dots */}
+        {/* Indicateurs (points) */}
         {images.length > 1 && (
           <View style={styles.dotsContainer}>
             {images.map((_, idx) => (
               <View
                 key={idx}
-                style={[styles.dot, { backgroundColor: idx === currentIndex ? "#fff" : "#888" }]}
+                style={[
+                  styles.dot,
+                  { backgroundColor: idx === currentIndex ? "#fff" : "#888" },
+                ]}
               />
             ))}
           </View>
         )}
       </View>
 
-      {/* Infos principales */}
+      {/* Détails */}
       <View style={styles.details}>
         <Text style={styles.title}>
           {apiData.typepropriete?.nom_propriete ?? ""}
-          {apiData.statut ? " à vendre" : " à louer"}
+          {apiData.statut ? " à vendre" : " à louer"}{" "}
         </Text>
-        <Text style={styles.price}>${formatNumber(apiData.prix)}</Text>
+        <Text style={styles.price}>${formatNumber(apiData.prix) ?? "N/A"} </Text>
 
         <View style={styles.row}>
           <Icon name="map-marker" size={18} color="#0d6efd" />
           <Text style={styles.address}>
-            {apiData.avenue ?? "N/A"}, {apiData.quartier ?? "N/A"}, ville: {apiData.ville?.nom_ville ?? "N/A"}
+            {apiData.avenue ?? "N/A"}, {apiData.quartier ?? "N/A"}, ville:{" "}
+            {apiData.ville?.nom_ville ?? "N/A"}
           </Text>
         </View>
 
@@ -204,16 +173,18 @@ function DetailContent() {
         {apiData.description ?? "Description non disponible"}
       </Text>
 
-      {/* Détails supplémentaires */}
+      {/* Détails du bien */}
       <Text style={styles.sectionTitle}>Détails du bien</Text>
       <View style={styles.detailBox}>
         <View style={styles.detailRow}>
           <Text style={styles.label}>Date d'ajout:</Text>
-          <Text style={styles.value}>{new Date(apiData.date_enregistrement).toLocaleDateString()}</Text>
+          <Text style={styles.value}>
+            {new Date(apiData.date_enregistrement).toLocaleDateString() ?? "N/A"}
+          </Text>
         </View>
         <View style={styles.detailRow}>
           <Text style={styles.label}>Prix :</Text>
-          <Text style={styles.value}>${formatNumber(apiData.prix)}</Text>
+          <Text style={styles.value}>${formatNumber(apiData.prix) ?? "N/A"}</Text>
         </View>
         <View style={styles.detailRow}>
           <Text style={styles.label}>Type :</Text>
@@ -227,6 +198,10 @@ function DetailContent() {
           <Text style={styles.label}>Salle de bains :</Text>
           <Text style={styles.value}>{apiData.nombre_salle_de_bain ?? "N/A"}</Text>
         </View>
+        <View style={styles.detailRow}>
+          <Text style={styles.label}>Statut :</Text>
+          <Text style={styles.value}>{apiData.statut ? "À Vendre - Disponible" : "À Louer"}</Text>
+        </View>
       </View>
 
       {/* Contact vendeur */}
@@ -235,31 +210,34 @@ function DetailContent() {
         <View style={styles.contactHeader}>
           <Icon name="user-circle" size={40} color="#888" />
           <View style={{ marginLeft: 10 }}>
-            <Text style={styles.contactName}>{nomComplet}</Text>
+            <Text style={styles.contactName}>{nomcomplet ?? "nom inconnu"}</Text>
             <Text style={styles.contactRole}>Agent Immo</Text>
           </View>
         </View>
 
+        {/* Téléphone */}
         <View style={styles.contactRow}>
           <Icon name="phone" size={18} color="#0d6efd" />
-          <Text style={styles.contactText}>{apiData.utilisateur?.telephone ?? "Aucun numéro"}</Text>
+          <Text style={styles.contactText}>{apiData.utilisateur?.telephone ?? "Aucun num téléphone"}</Text>
         </View>
 
+        {/* Email */}
         <View style={styles.contactRow}>
           <Icon name="envelope" size={18} color="#0d6efd" />
           <Text style={styles.contactText}>{apiData.utilisateur?.email ?? "Aucun email"}</Text>
         </View>
 
+        {/* WhatsApp */}
         <TouchableOpacity style={styles.contactRow}>
           <Icon name="whatsapp" size={18} color="green" />
-          <Text style={styles.contactText}>WhatsApp</Text>
+          <Text style={styles.contactText}> whatsapp </Text>
         </TouchableOpacity>
       </View>
     </ScrollView>
   );
 }
 
-// ---- STYLES ----
+// Styles
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
   imageContainer: { position: "relative" },
@@ -281,7 +259,7 @@ const styles = StyleSheet.create({
   detailRow: { flexDirection: "row", justifyContent: "space-between", paddingVertical: 6, borderBottomWidth: 0.5, borderBottomColor: "#ddd" },
   label: { fontSize: 14, fontWeight: "600", color: "#333" },
   value: { fontSize: 14, color: "#444" },
-  contactBox: { backgroundColor: "#f5f5f5", borderRadius: 8, padding: 12, marginBottom: 20 },
+  contactBox: { backgroundColor: "#f5f5f5", borderRadius: 8, padding: 12 },
   contactHeader: { flexDirection: "row", alignItems: "center", marginBottom: 15 },
   contactName: { fontSize: 16, fontWeight: "bold" },
   contactRole: { fontSize: 13, color: "#666" },

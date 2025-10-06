@@ -21,10 +21,10 @@ const PropertyList = () => {
 
         const api=getApi();
      
-        const res = await api.get("/api/proprietes");
+        const res = await api.get("/api/proprieteall");
         const data = res.data.map(item => ({
           id: item.id,
-          title: "Maison",
+          title: item.typepropriete?.nom_propriete ?? "Nom inconnu",
           price: formatPrice(item.prix),  // Utiliser la fonction de formatage ici
           description: item.description,
           image: { uri: getImageUrl(item.image_principale) },
@@ -111,7 +111,7 @@ const PropertyCard = ({ property}) => {
           <Text style={styles.detailText}>{property.nombre_salle_de_bain} Salles de bain</Text>
         </View>
       </View>
-      <Text style={styles.price}>{property.price}</Text>
+      <Text style={styles.price}>${property.price}</Text>
       <Text style={styles.description}>{property.description}</Text>
       <TouchableOpacity style={styles.button}   onPress={() => ActionDetails(property.id)}>
         <Text style={styles.buttonText}>Voir détails</Text>

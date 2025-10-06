@@ -8,14 +8,17 @@ import { StatusBar } from 'expo-status-bar';
 
 // Importez vos écrans
 import MonMenu from '../Menues/MonMenu';
-import AccueilScreen from '../Screens/AcceuilScreen';
+import AccueilScreen from '../MesScreens/AcceuilScreen';
 import Agents from '../Menues/Agents';
 import AgencesImmo from '../Menues/AgencesImmo';
-import PropertyList from '../MesScreens/ListePropertieScreen';
 import LoginScreen from '../MesScreens/LoginScreen';
 import InscriptionScreen from '../MesScreens/InscriptionScreen';
 import RegisterScreen from '../MesScreens/RegisterScreen';
 import DetailScreen from '../MesScreens/DetailScreen';
+import ListScreen from '../MesScreens/ListScreen';
+import ListScreentout from '../MesScreens/ListScreentout';
+import FilterScreen from '../MesScreens/FilterScreen';
+import AppartementCard from '../MesScreens/MapsScreen';
 
 
 
@@ -62,11 +65,14 @@ function MainDrawer() {
     >
       <Drawer.Screen name="Accueil" component={createMenuStack(AccueilScreen, 'Accueil')} />
       <Drawer.Screen name="Ajouter une propriété" component={createMenuStack(InscriptionScreen, 'Ajouter une propriété')} />
-      <Drawer.Screen name="Propriétés" component={createMenuStack(PropertyList , 'Propriétés')} />
+      <Drawer.Screen name="Propriétés" component={createMenuStack(ListScreen, 'Propriétés')} />
       <Drawer.Screen name="Agents" component={createMenuStack(Agents, 'Agents')} />
       <Drawer.Screen name="Agences Immo" component={createMenuStack(AgencesImmo, 'Agences Immo')} />
       <Drawer.Screen name="Connexion" component={createMenuStack(LoginScreen, 'Connexion')} />
       <Drawer.Screen name="Register" component={createMenuStack(RegisterScreen, 'Inscription')} />
+      {/*   <Drawer.Screen name="Liste" component={createMenuStack(ListScreen, 'Liste')} /> */}
+
+
     </Drawer.Navigator>
   );
 }
@@ -90,6 +96,45 @@ export default function Naviger() {
             headerTitleAlign: 'center',
           }}
         />
+
+        <MainStack.Screen
+          name="ListScreentout"
+          component={ListScreentout}
+          options={{
+            headerShown: true, // ✅ header visible
+            title: 'Liste Propriétés',
+            headerStyle: { backgroundColor: '#0A1F44' },
+            headerTintColor: '#FFD700',
+            headerTitleAlign: 'center',
+          }}
+        />
+
+        <MainStack.Screen
+          name="FilterScreen"
+          component={FilterScreen}
+          options={{
+            headerShown: true, // ✅ header visible
+            title: 'Recherche Propriétés',
+            headerStyle: { backgroundColor: '#0A1F44' },
+            headerTintColor: '#FFD700',
+            headerTitleAlign: 'center',
+          }}
+        />
+
+
+        <MainStack.Screen
+          name="AppartementCard"
+          component={AppartementCard}
+          options={{
+            headerShown: true, // ✅ header visible
+            title: 'Localisation',
+            headerStyle: { backgroundColor: '#0A1F44' },
+            headerTintColor: '#FFD700',
+            headerTitleAlign: 'center',
+          }}
+        />
+
+
       </MainStack.Navigator>
     </NavigationContainer>
   );

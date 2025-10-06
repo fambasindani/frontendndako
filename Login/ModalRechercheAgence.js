@@ -10,7 +10,7 @@ import {
   Dimensions,
   StatusBar, // ✅ ajouté ici
 } from 'react-native';
-import { Couleurs } from './Couleurs';
+import { Couleurs } from '../Composant/Couleurs';
 
 const { width } = Dimensions.get('window');
 
