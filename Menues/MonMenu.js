@@ -76,20 +76,8 @@ export default function MonMenu(props) {
       },
     },
 
-/* 
-    {
-      label: 'Liste',
-      icon: 'info-circle',
-      action: () => {
-        props.navigation.navigate('Liste');
-      },
-    },
- */
 
-   
-
-
-    {
+      {
       label: 'Propriétés',
       icon: 'building',
       action: () => {
@@ -107,8 +95,25 @@ export default function MonMenu(props) {
       },
     },
 
-    { label: 'Agents', icon: 'users', screen: 'Agents' },
-    { label: 'Agences Immo', icon: 'cubes', screen: 'Agences Immo' },
+
+     {
+      label: 'Parametre',
+      icon: 'info-circle',
+      action: () => {
+        props.navigation.navigate('Parametre');
+      },
+    },
+ 
+
+   
+
+
+  
+
+    
+
+   // { label: 'Agents', icon: 'users', screen: 'Agents' },
+    { label: 'Sécurité', icon: 'cubes', screen: 'Agences Immo' },
    // { label: 'Liste', icon: 'cubes', screen: 'ListScreen' },
 
     // Connexion seulement si non connecté

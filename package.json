@@ -37,7 +37,8 @@
     "react-native-screens": "~4.11.1",
     "react-native-vector-icons": "^10.3.0",
     "react-native-webview": "13.13.5",
-    "relative-time-format": "^1.1.11"
+    "relative-time-format": "^1.1.11",
+    "@react-native-picker/picker": "2.11.1"
   },
   "devDependencies": {
     "@babel/core": "^7.26.0",

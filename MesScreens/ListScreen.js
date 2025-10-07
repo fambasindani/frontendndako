@@ -37,6 +37,8 @@ const ListScreen = ({ navigation }) => {
       try {
         const nom = await AsyncStorage.getItem("userNom");
         const prenom = await AsyncStorage.getItem("userPrenom");
+        const userId = await AsyncStorage.getItem("userId");
+        
         const nomcomplets=prenom+"  "+nom;
         setUserNom(nomcomplets);
         const token = await AsyncStorage.getItem("token");
@@ -46,7 +48,9 @@ const ListScreen = ({ navigation }) => {
         }
 
         const api = getApi();
-        const res = await api.get("/api/proprieteall");
+       // const res = await api.get("/api/proprieteall");
+       
+        const res = await api.get(`api/proprieteIdUser/${userId}`);
         const data = res.data.map((item) => ({
           id: item.id,
           nom:item.utilisateur?.nom_famille ,

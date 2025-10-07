@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   Text,
@@ -11,24 +11,35 @@ import {
   Platform,
   KeyboardAvoidingView,
 } from 'react-native';
+import { getApi } from '../Api/getApi';
 
 const MAX_PRICE = 100_000_000; // 100 millions
 
 const FilterScreen = () => {
   const [selectedPropertyTypes, setSelectedPropertyTypes] = useState(['Tout']);
   const [selectedAdType, setSelectedAdType] = useState(['Tout']);
-  const [selectedRooms, setSelectedRooms] = useState([]);
-  const [selectedBathrooms, setSelectedBathrooms] = useState([]);
-
-  // Controlled strings pour les inputs
+  const [selectedRoom, setSelectedRoom] = useState(null); // État pour une seule sélection de chambres
+  const [selectedBathroom, setSelectedBathroom] = useState(null); // État pour une seule sélection de salles de bains
   const [rawPriceMinStr, setRawPriceMinStr] = useState('0');
   const [rawPriceMaxStr, setRawPriceMaxStr] = useState(String(MAX_PRICE));
+  const [propertyTypes, setPropertyTypes] = useState([]); // État pour les types de propriétés
 
-  const propertyTypes = [
-    'Tout', 'Appartement', 'Studio', 'Maison',
-    'Villa', 'Parcelle', 'Terrain', 'Commercial', 'Flat Hôtel'
-  ];
-  const adTypes = [ 'Location', 'Vente'];
+  useEffect(() => {
+    const fetchPropertyTypes = async () => {
+      try {
+        const api = getApi();
+        const response = await api.get('api/type-proprietes');
+        setPropertyTypes(response.data); // Mettre à jour l'état avec les données de l'API
+      } catch (error) {
+        console.error("Erreur lors de la récupération des types de propriétés:", error);
+        Alert.alert('Erreur', 'Impossible de récupérer les types de propriétés.');
+      }
+    };
+
+    fetchPropertyTypes();
+  }, []);
+
+  const adTypes = ['Location', 'Vente'];
   const roomNumbers = ['1+', '2+', '3+', '4+', '5+'];
   const bathroomNumbers = ['1', '2', '3', '4', '5'];
 
@@ -42,15 +53,13 @@ const FilterScreen = () => {
   };
 
   const toggleSelection = (item, selectedItems, setSelectedItems) => {
-    if (item === 'Location') {
-      setSelectedItems(['Location']);
+    // Si l'élément est déjà sélectionné, le retirer de la sélection
+    if (selectedItems.includes(item)) {
+      setSelectedItems([]); // Désélectionner
     } else {
-      const newSelection = selectedItems.includes(item)
-        ? selectedItems.filter(i => i !== item)
-        : [...selectedItems.filter(i => i !== 'Location'), item];
-
-      setSelectedItems(newSelection.length === 0 ? ['Location'] : newSelection);
+      setSelectedItems([item]); // Sélectionner uniquement cet élément
     }
+    Alert.alert('Sélection', `Vous avez sélectionné: ${item}`); // Affiche l'alerte
   };
 
   const FilterButton = ({ title, isSelected, onPress }) => (
@@ -73,8 +82,8 @@ const FilterScreen = () => {
   const handleCancel = () => {
     setSelectedPropertyTypes(['Tout']);
     setSelectedAdType(['Tout']);
-    setSelectedRooms([]);
-    setSelectedBathrooms([]);
+    setSelectedRoom(null); // Réinitialiser la sélection de chambres
+    setSelectedBathroom(null); // Réinitialiser la sélection de salles de bains
     setRawPriceMinStr('0');
     setRawPriceMaxStr(String(MAX_PRICE));
   };
@@ -97,12 +106,11 @@ const FilterScreen = () => {
     }
 
     const finalMax = Math.min(max, MAX_PRICE);
-
     console.log('Filtres appliqués:', {
       propertyTypes: selectedPropertyTypes,
       adType: selectedAdType,
-      rooms: selectedRooms,
-      bathrooms: selectedBathrooms,
+      rooms: selectedRoom,
+      bathrooms: selectedBathroom,
       priceMin: min,
       priceMax: finalMax,
     });
@@ -153,10 +161,10 @@ const FilterScreen = () => {
             <View style={styles.buttonContainer}>
               {propertyTypes.map((type) => (
                 <FilterButton
-                  key={type}
-                  title={type}
-                  isSelected={selectedPropertyTypes.includes(type)}
-                  onPress={() => toggleSelection(type, selectedPropertyTypes, setSelectedPropertyTypes)}
+                  key={type.id}
+                  title={type.nom_propriete}
+                  isSelected={selectedPropertyTypes.includes(type.nom_propriete)}
+                  onPress={() => toggleSelection(type.nom_propriete, selectedPropertyTypes, setSelectedPropertyTypes)}
                 />
               ))}
             </View>
@@ -185,8 +193,11 @@ const FilterScreen = () => {
                 <FilterButton
                   key={room}
                   title={room}
-                  isSelected={selectedRooms.includes(room)}
-                  onPress={() => toggleSelection(room, selectedRooms, setSelectedRooms)}
+                  isSelected={selectedRoom === room} // Vérifie si la chambre est sélectionnée
+                  onPress={() => {
+                    setSelectedRoom(room); // Sélectionne la chambre unique
+                    Alert.alert('Sélection', `Vous avez sélectionné: ${room}`); // Affiche l'alerte
+                  }}
                 />
               ))}
             </View>
@@ -200,8 +211,11 @@ const FilterScreen = () => {
                 <FilterButton
                   key={bathroom}
                   title={bathroom}
-                  isSelected={selectedBathrooms.includes(bathroom)}
-                  onPress={() => toggleSelection(bathroom, selectedBathrooms, setSelectedBathrooms)}
+                  isSelected={selectedBathroom === bathroom} // Vérifie si la salle de bain est sélectionnée
+                  onPress={() => {
+                    setSelectedBathroom(bathroom); // Sélectionne la salle de bain unique
+                    Alert.alert('Sélection', `Vous avez sélectionné: ${bathroom}`); // Affiche l'alerte
+                  }}
                 />
               ))}
             </View>
@@ -265,8 +279,8 @@ const FilterScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#FFFFFF' , marginBottom:30},
-  scrollView: { flex: 1, paddingHorizontal: 20 },
+  container: { flex: 1, backgroundColor: '#FFFFFF', marginBottom: 30 },
+  scrollView: { flex: 1, paddingHorizontal: 20, marginTop:20 },
   section: { marginBottom: 24 },
   sectionTitle: { fontSize: 18, fontWeight: '600', color: '#2E5BBA', marginBottom: 12 },
   buttonContainer: { flexDirection: 'row', flexWrap: 'wrap' },

@@ -19,6 +19,7 @@ import ListScreen from '../MesScreens/ListScreen';
 import ListScreentout from '../MesScreens/ListScreentout';
 import FilterScreen from '../MesScreens/FilterScreen';
 import AppartementCard from '../MesScreens/MapsScreen';
+import ListeScreenpvc from '../MesScreens/ListeScreenpvc';
 
 
 
@@ -67,10 +68,10 @@ function MainDrawer() {
       <Drawer.Screen name="Ajouter une propriété" component={createMenuStack(InscriptionScreen, 'Ajouter une propriété')} />
       <Drawer.Screen name="Propriétés" component={createMenuStack(ListScreen, 'Propriétés')} />
       <Drawer.Screen name="Agents" component={createMenuStack(Agents, 'Agents')} />
-      <Drawer.Screen name="Agences Immo" component={createMenuStack(AgencesImmo, 'Agences Immo')} />
+      <Drawer.Screen name="Agences Immo" component={createMenuStack(AgencesImmo, 'Sécurité')} />
       <Drawer.Screen name="Connexion" component={createMenuStack(LoginScreen, 'Connexion')} />
       <Drawer.Screen name="Register" component={createMenuStack(RegisterScreen, 'Inscription')} />
-      {/*   <Drawer.Screen name="Liste" component={createMenuStack(ListScreen, 'Liste')} /> */}
+      <Drawer.Screen name="Parametre" component={createMenuStack(ListeScreenpvc, 'Confuguration')} /> 
 
 
     </Drawer.Navigator>

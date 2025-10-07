@@ -87,7 +87,7 @@ const LoaderOverlay = () => (
 );
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Couleurs.background, marginBottom: 20 },
+  container: { flex: 1, backgroundColor: Couleurs.background, marginBottom:20 },
   mapContainer: { flex: 2, position: 'relative' },
   webview: { width: '100%', height: '100%' },
   loaderOverlay: {
