@@ -20,6 +20,7 @@ import ListScreentout from '../MesScreens/ListScreentout';
 import FilterScreen from '../MesScreens/FilterScreen';
 import AppartementCard from '../MesScreens/MapsScreen';
 import ListeScreenpvc from '../MesScreens/ListeScreenpvc';
+import ListeFiltreScreen from '../MesScreens/ListeFiltreScreen';
 
 
 
@@ -134,6 +135,20 @@ export default function Naviger() {
             headerTitleAlign: 'center',
           }}
         />
+
+         <MainStack.Screen
+          name="ListeFiltreScreen"
+          component={ListeFiltreScreen}
+          options={{
+            headerShown: true, // ✅ header visible
+            title: 'Resultat trouvé',
+            headerStyle: { backgroundColor: '#0A1F44' },
+            headerTintColor: '#FFD700',
+            headerTitleAlign: 'center',
+          }}
+        />
+
+
 
 
       </MainStack.Navigator>

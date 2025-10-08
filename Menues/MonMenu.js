@@ -114,7 +114,7 @@ export default function MonMenu(props) {
 
    // { label: 'Agents', icon: 'users', screen: 'Agents' },
     { label: 'Sécurité', icon: 'cubes', screen: 'Agences Immo' },
-   // { label: 'Liste', icon: 'cubes', screen: 'ListScreen' },
+   { label: 'Resultat trouvé', icon: 'cubes', screen: 'ListeFiltreScreen' },
 
     // Connexion seulement si non connecté
     //  ...(!isConnected ? [{ label: 'Connexion', icon: 'user', screen: 'Connexion' }] : []),
