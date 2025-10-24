@@ -208,7 +208,7 @@ function Card({ item, navigation }) {
         </View>
 
         <View style={styles.row}>
-          <Icon name="map-marker" size={14} color="#0d6efd" />
+          <Icon name="map-marker" size={14} color="orange" />
           <Text style={styles.location}>{item.location}</Text>
         </View>
 
@@ -227,7 +227,7 @@ function Card({ item, navigation }) {
           style={styles.detailsButton}
           onPress={() => navigation.navigate("Details", { id: item.id })}
         >
-          <Text style={styles.detailsButtonText}>Voir les détails</Text>
+          <Text style={styles.detailsButtonText}>Voir les détails  <Image source={require("../assets/bouton.png")} style={[styles.logo]} resizeMode="contain" /></Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -236,10 +236,10 @@ function Card({ item, navigation }) {
 
 // 🔹 Styles
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#f5f5f5" },
-  loader: { flex: 1, justifyContent: "center", alignItems: "center" },
-  filterSection: { marginBottom: 20, backgroundColor: "#fff", padding: 10 },
-  title: { fontSize: 20, fontWeight: "bold", marginBottom: 10, color: "#0d2c6b" },
+  container: { flex: 1, backgroundColor: "#f5f5f5", marginBottom:40},
+  loader: { flex: 1, justifyContent: "center", alignItems: "center", position:"sticky" },
+  filterSection: { marginBottom: 20, backgroundColor: "#fff",paddingBottom:15, padding: 10, position:"relative", borderBottomColor:"gray", borderBottomWidth:0.20 },
+  title: { fontSize: 18, fontWeight: "bold", marginBottom: 10, color: "#0d2c6b" },
   buttonContainer: { flexDirection: "row" },
   filterButton: {
     backgroundColor: "white",
@@ -250,6 +250,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginRight: 8,
   },
+  logo: { 
+   
+    width:16,
+    height:16,
+  
+  
+  },
+
   filterButtonSelected: { backgroundColor: "#224270" },
   filterButtonText: { color: "#224270", fontWeight: "bold" },
   filterButtonTextSelected: { color: "white" },
@@ -264,10 +272,11 @@ const styles = StyleSheet.create({
   sectionTitle: { fontSize: 18, fontWeight: "bold", color: "#0d2c6b" },
   seeMore: { fontSize: 14, color: "#0d6efd", fontWeight: "600" },
   card: {
-    width: width * 0.65,
+    width: width * 0.55,
     marginRight: 12,
+    marginBottom:9,
     backgroundColor: "#fff",
-    borderRadius: 12,
+    borderRadius: 8,
     shadowColor: "#000",
     shadowOpacity: 0.1,
     shadowRadius: 6,
@@ -282,7 +291,8 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFD580",
     paddingHorizontal: 10,
     paddingVertical: 3,
-    borderRadius: 8,
+    borderRadius: 90,
+    
   },
   statusText: { fontSize: 12, fontWeight: "600" },
   cardBody: { padding: 10 },
@@ -302,8 +312,8 @@ const styles = StyleSheet.create({
     marginTop: 8,
     backgroundColor: Couleurs.couleurprincipale,
     paddingVertical: 6,
-    borderRadius: 6,
+    borderRadius: 16,
     alignItems: "center",
   },
-  detailsButtonText: { color: "#fff", fontSize: 13, fontWeight: "600" },
+  detailsButtonText: { color: "#fff", fontSize: 13, fontWeight: "60", },
 });

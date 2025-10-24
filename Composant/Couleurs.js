@@ -6,7 +6,7 @@ export const Couleurs = {
   // Couleurs de fond
   background: "#F7FAFC",
   white: "#FFFFFF",
-  couleurprincipale:"#0A1F44",
+  couleurprincipale:"#2C5282",
 
   // Couleurs de texte
   textPrimary: "#2D3748",

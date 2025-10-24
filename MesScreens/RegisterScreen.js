@@ -288,7 +288,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: Couleurs.background,
-        paddingTop: 20,
+        paddingTop: 20, marginBottom:40,
     },
     contentContainer: {
         flexGrow: 1,

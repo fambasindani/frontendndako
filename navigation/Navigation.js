@@ -34,9 +34,9 @@ function createMenuStack(screen, title) {
     return (
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: '#0A1F44' },
-          headerTintColor: '#FFD700',
-          headerTitleStyle: { fontWeight: 'bold' },
+          headerStyle: { backgroundColor: '#234270', },
+          headerTintColor: 'white',
+          headerTitleStyle: { fontWeight: '0'},
           headerTitleAlign: 'center',
           headerLeft: () => (
             <TouchableOpacity
@@ -47,7 +47,7 @@ function createMenuStack(screen, title) {
                   : navigation.toggleDrawer()
               }
             >
-              <Icon name={title === 'Inscription' ? 'arrow-left' : 'bars'} size={25} color="#FFD700" />
+              <Icon name={title === 'Inscription' ? 'arrow-left' : 'bars'} size={25} color="white" />
             </TouchableOpacity>
           ),
         }}

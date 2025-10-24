@@ -119,15 +119,15 @@ export default function Province() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#f8fafc", marginBottom: 25 },
-  loaderContainer: { flex: 1, justifyContent: "center", alignItems: "center" },
+  container: { flex: 1, backgroundColor: "#f8fafc", },
+  loaderContainer: { flex: 1, justifyContent: "center", alignItems: "center", },
   loaderText: { marginTop: 10, color: "#475569", fontSize: 16 },
-  topBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 16, backgroundColor: "#fff", borderBottomWidth: 1, borderBottomColor: "#e2e8f0" },
+  topBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 16, backgroundColor: "#eaeaea", borderBottomWidth: 0.5, borderBottomColor: "#c1c2c2" },
   title: { fontSize: 18, fontWeight: "700", color: "#1e293b" },
   addButton: { flexDirection: "row", alignItems: "center", backgroundColor: "#10b981", paddingVertical: 8, paddingHorizontal: 16, borderRadius: 20, gap: 6, elevation: 2 },
   addButtonText: { color: "#fff", fontWeight: "600", fontSize: 14 },
   listContainer: { padding: 16, gap: 12 },
-  card: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: "#fff", padding: 16, borderRadius: 12, elevation: 2 },
+  card: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: "#fff", padding: 14, borderRadius: 1, elevation: 2 },
   cardLeft: { flexDirection: "row", alignItems: "center", gap: 12, flex: 1 },
   numberBadge: { width: 36, height: 36, borderRadius: 18, backgroundColor: "#6366f1", justifyContent: "center", alignItems: "center" },
   numberText: { color: "#fff", fontWeight: "700", fontSize: 16 },

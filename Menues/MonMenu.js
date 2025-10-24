@@ -159,7 +159,7 @@ export default function MonMenu(props) {
         {/* Logo + Titre */}
         <View style={styles.logoContainer}>
           <Image source={require('../assets/KCI WHITE.png')} style={styles.logo} />
-          <Text style={styles.title}>CONCEPT IMMOBILIER</Text>
+          
         </View>
 
         <View style={styles.separator} />
@@ -188,12 +188,12 @@ export default function MonMenu(props) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#0A1F44', paddingTop: 0 },
+  container: { flex: 1, backgroundColor: '#234270', borderBottomEndRadius:20,borderTopEndRadius:20, borderBottom:40,marginBottom:45,marginTop:100 },
   logoContainer: { alignItems: 'center', justifyContent: 'center', paddingVertical: 30 },
-  logo: { width: 100, height: 100, resizeMode: 'contain', marginBottom: 10 },
-  title: { color: '#FFD700', fontSize: 18, fontWeight: 'bold' },
-  separator: { height: 1, backgroundColor: '#FFD700', marginHorizontal: 20, marginBottom: 20 },
+  logo: { width: 70, height: 100, resizeMode: 'contain', marginBottom: 1 ,marginTop: 50 },
+  title: { color: '#e9c162', fontSize: 18, fontWeight: 'bold' },
+  separator: { height: 0.2, backgroundColor: 'white', marginHorizontal: 10, marginBottom: 20 },
   menuItem: { flexDirection: 'row', alignItems: 'center', paddingVertical: 15, paddingHorizontal: 20 },
-  icon: { marginRight: 15 },
-  label: { color: '#fff', fontSize: 16, fontWeight: '500' },
+  icon: { marginRight: 15,color: 'white', },
+  label: { color: '#e9c162', fontSize: 14, },
 });

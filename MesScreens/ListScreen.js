@@ -154,7 +154,7 @@ const ListScreen = ({ navigation }) => {
         </View>
 
         <TouchableOpacity style={styles.addButton} onPress={handleAddProperty}>
-          <Ionicons name="add" size={20} color={Couleurs.primary} />
+          <Ionicons name="add-circle" size={20} color={Couleurs.primary} />
           <Text style={styles.addButtonText}>Ajouter</Text>
         </TouchableOpacity>
       </View>
@@ -197,10 +197,11 @@ const ListScreen = ({ navigation }) => {
 // 🎨 Styles
 const styles = StyleSheet.create({
   container: {
-    paddingTop: 20,
-    paddingBottom: 30,
+    paddingTop: 0,
     flex: 1,
+    paddingBottom:40,
     backgroundColor: Couleurs.background,
+ 
   },
   loader: {
     flex: 1,
@@ -212,18 +213,18 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignItems: "center",
     padding: 16,
-    backgroundColor: Couleurs.white,
+    backgroundColor:"#e8e9ea",
     borderBottomWidth: 1,
-    borderBottomColor: Couleurs.border,
+    borderBottomColor: "#d3d4d5",
   },
   agentInfo: {
     flexDirection: "row",
     alignItems: "center",
   },
   agentAvatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 55,
+    height: 55,
+    borderRadius: 55,
     backgroundColor: Couleurs.primary,
     justifyContent: "center",
     alignItems: "center",
@@ -244,9 +245,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
     paddingHorizontal: 12,
     paddingVertical: 8,
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderColor: Couleurs.primary,
-    borderRadius: 6,
+    borderRadius: 2,
   },
   addButtonText: {
     marginLeft: 6,
@@ -260,6 +261,8 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     backgroundColor: Couleurs.white,
     gap: 8,
+    borderBottomWidth: 0.3,
+    borderBottomColor: "#d3d4d5",
   },
   filterButton: {
     paddingHorizontal: 16,

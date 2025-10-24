@@ -76,7 +76,7 @@ const Button = ({
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 8,
+    borderRadius: 40,
     paddingHorizontal: 24,
     paddingVertical: 12,
     alignItems: "center",

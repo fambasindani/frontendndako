@@ -28,8 +28,7 @@ const Logo = ({ size = "medium", showText = true, style }) => {
 
   return (
     <View style={[styles.container, style]}>
-      <Image source={require("../assets/KCI WHITE.png")} style={[styles.logo, getLogoSize()]} resizeMode="contain" />
-      {showText && <Text style={[styles.text, { fontSize: getTextSize() }]}>CONCEPT IMMOBILIER</Text>}
+      <Image source={require("../assets/KCI BLUE.png")} style={[styles.logo, getLogoSize()]} resizeMode="contain" />
     </View>
   )
 }
@@ -40,7 +39,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   logo: {
-    marginBottom: 8,
+    marginBottom:1,
+    marginTop:50,
   },
   text: {
     fontWeight: "600",
