@@ -104,8 +104,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingVertical: 12,
     paddingHorizontal: 16,
-    borderRadius: 12,
-    backgroundColor: "#f1f5f9",
+    borderRadius: 2,
+    backgroundColor: "#e2e2e2",
     gap: 8,
   },
   activeTab: {

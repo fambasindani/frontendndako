@@ -324,7 +324,7 @@ const InscriptionScreen = () => {
 };
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: Couleurs.background },
+  container: { flex: 1, backgroundColor: Couleurs.background,marginBottom:1,},
   content: { padding: 20, paddingBottom: 40 },
   row: { flexDirection: "row", justifyContent: "space-between", gap: 12 },
   halfWidth: { flex: 1 },

@@ -119,12 +119,13 @@ export default function AjouteCommuneScreen({ onAdd, onCancel, commune, villes }
           </TouchableOpacity>
 
           <TouchableOpacity
-            style={[styles.submitButton, (loading || !nom.trim() || !selectedVille) && styles.submitButtonDisabled]}
-            onPress={handleSubmit}
-            disabled={loading || !nom.trim() || !selectedVille}
-          >
-            {loading ? <ActivityIndicator color="#fff" /> : <Text style={styles.submitButtonText}>{commune ? "Mettre à jour" : "Enregistrer"}</Text>}
-          </TouchableOpacity>
+                     style={[styles.submitButton, (!nom.trim() || loading) && styles.submitButtonDisabled]}
+                     onPress={handleSubmit}
+                     disabled={!nom.trim() || loading}
+                   >
+                     <Ionicons name={loading ? "time" : "checkmark-circle"} size={20} color="#fff" />
+                     <Text style={styles.submitButtonText}>{loading ? "Mettre à jour" : "Enregistrer"}</Text>
+                   </TouchableOpacity>
         </View>
       </View>
     </KeyboardAvoidingView>
@@ -133,18 +134,18 @@ export default function AjouteCommuneScreen({ onAdd, onCancel, commune, villes }
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#f8fafc" },
-  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 16, backgroundColor: "#fff", borderBottomWidth: 1, borderBottomColor: "#e2e8f0" },
+  header: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 16, backgroundColor: "#e2e2e2", borderBottomWidth: 1, borderBottomColor: "#b8b8b8" },
   headerTitle: { fontSize: 18, fontWeight: "700", color: "#1e293b" },
   content: { flex: 1, padding: 24 },
   formContainer: { marginBottom: 24 },
-  label: { fontSize: 16, fontWeight: "600", color: "#1e293b", marginBottom: 8 },
+  label: { fontSize: 16, fontWeight: "600", color: "#1e293b", marginBottom: 19 },
   input: { backgroundColor: "#fff", borderWidth: 2, borderColor: "#e2e8f0", borderRadius: 12, padding: 16, fontSize: 16, color: "#1e293b" },
-  inputError: { borderColor: "#ef4444" },
-  errorText: { color: "#ef4444", marginTop: 4, fontSize: 13 },
-  buttonContainer: { flexDirection: "row", gap: 12 },
-  cancelButton: { flex: 1, paddingVertical: 16, borderRadius: 12, backgroundColor: "#fff", borderWidth: 2, borderColor: "#e2e8f0", alignItems: "center" },
+  inputErrorBorder: { borderColor: "#ef4444" },
+  errorText: { marginTop: 8, color: "#ef4444", fontSize: 13, fontWeight: "600" },
+  buttonContainer: { flexDirection: "row", gap: 12, marginTop: 24 },
+  cancelButton: { flex: 1, paddingVertical: 12, borderRadius: 4, backgroundColor: "#fff", borderWidth: 2, borderColor: "#e2e8f0", alignItems: "center" },
   cancelButtonText: { fontSize: 16, fontWeight: "600", color: "#64748b" },
-  submitButton: { flex: 1, paddingVertical: 16, borderRadius: 12, backgroundColor: "#10b981", alignItems: "center", justifyContent: "center", elevation: 2 },
-  submitButtonDisabled: { backgroundColor: "#94a3b8" },
+  submitButton: { flex: 1, flexDirection: "row", paddingVertical: 12, borderRadius: 4, backgroundColor: "#10b981", alignItems: "center", justifyContent: "center", gap: 8, elevation: 2, shadowColor: "#10b981", shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.3, shadowRadius: 4 },
+  submitButtonDisabled: { backgroundColor: "#94a3b8", elevation: 0 },
   submitButtonText: { fontSize: 16, fontWeight: "600", color: "#fff" },
 });

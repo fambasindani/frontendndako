@@ -120,7 +120,7 @@ export default function Ville() {
                     style={styles.deleteButton}
                     onPress={() => handleDelete(item.id)}
                 >
-                    <Ionicons name="trash-outline" size={20} color="#ef4444" />
+                    <Ionicons name="trash-outline" size={20} color="#3b82f6" />
                 </TouchableOpacity>
             </View>
         </View>
@@ -178,15 +178,7 @@ export default function Ville() {
 
 const styles = StyleSheet.create({
     container: { flex: 1, backgroundColor: "#f8fafc", marginBottom: 25 },
-    topBar: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        padding: 16,
-        backgroundColor: "#fff",
-        borderBottomWidth: 1,
-        borderBottomColor: "#e2e8f0",
-    },
+    topBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 16, backgroundColor: "#eaeaea", borderBottomWidth: 0.5, borderBottomColor: "#c1c2c2" },
     title: { fontSize: 18, fontWeight: "700", color: "#1e293b" },
     addButton: {
         flexDirection: "row",
@@ -198,14 +190,14 @@ const styles = StyleSheet.create({
         gap: 6,
     },
     addButtonText: { color: "#fff", fontWeight: "600", fontSize: 14 },
-    listContainer: { padding: 16, gap: 12 },
+    listContainer: { padding: 3, gap: 10 },
     card: {
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
         backgroundColor: "#fff",
         padding: 16,
-        borderRadius: 12,
+        borderRadius: 1,
         elevation: 2,
     },
     cardLeft: { flexDirection: "row", alignItems: "center", gap: 12, flex: 1 },
@@ -223,7 +215,7 @@ const styles = StyleSheet.create({
     editButton: {
         width: 40,
         height: 40,
-        borderRadius: 20,
+        borderRadius: 0,
         backgroundColor: "#dbeafe",
         justifyContent: "center",
         alignItems: "center",
@@ -231,8 +223,8 @@ const styles = StyleSheet.create({
     deleteButton: {
         width: 40,
         height: 40,
-        borderRadius: 20,
-        backgroundColor: "#fee2e2",
+        borderRadius: 0,
+        backgroundColor: "#dbeafe",
         justifyContent: "center",
         alignItems: "center",
     },

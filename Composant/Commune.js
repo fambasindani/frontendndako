@@ -87,7 +87,7 @@ export default function Commune() {
           <Ionicons name="create-outline" size={20} color="#3b82f6" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.deleteButton} onPress={() => handleDelete(item.id)}>
-          <Ionicons name="trash-outline" size={20} color="#ef4444" />
+          <Ionicons name="trash-outline" size={20} color="#3b82f6" />
         </TouchableOpacity>
       </View>
     </View>
@@ -132,13 +132,13 @@ export default function Commune() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#f8fafc", marginBottom: 25 },
-  topBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 16, backgroundColor: "#fff", borderBottomWidth: 1, borderBottomColor: "#e2e8f0" },
+  container: { flex: 1, backgroundColor: "#f8fafc", marginBottom:40 },
+  topBar: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", padding: 16, backgroundColor: "#eaeaea", borderBottomWidth: 0.5, borderBottomColor: "#c1c2c2" },
   title: { fontSize: 18, fontWeight: "700", color: "#1e293b" },
   addButton: { flexDirection: "row", alignItems: "center", backgroundColor: "#10b981", paddingVertical: 8, paddingHorizontal: 16, borderRadius: 20, gap: 6 },
   addButtonText: { color: "#fff", fontWeight: "600", fontSize: 14 },
-  listContainer: { padding: 16, gap: 12 },
-  card: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: "#fff", padding: 16, borderRadius: 12, elevation: 2 },
+  listContainer: { padding: 3, gap: 10 },
+  card: { flexDirection: "row", justifyContent: "space-between", alignItems: "center", backgroundColor: "#fff", padding: 16, borderRadius: 1, elevation: 2 },
   cardLeft: { flexDirection: "row", alignItems: "center", gap: 12, flex: 1 },
   numberBadge: { width: 36, height: 36, borderRadius: 18, backgroundColor: "#6366f1", justifyContent: "center", alignItems: "center" },
   numberText: { color: "#fff", fontWeight: "700", fontSize: 16 },
@@ -146,6 +146,6 @@ const styles = StyleSheet.create({
   villeText: { color: "#64748b", fontSize: 14 },
   communeText: { fontSize: 16, fontWeight: "600", color: "#1e293b" },
   cardRight: { flexDirection: "row", gap: 8 },
-  editButton: { width: 40, height: 40, borderRadius: 20, backgroundColor: "#dbeafe", justifyContent: "center", alignItems: "center" },
-  deleteButton: { width: 40, height: 40, borderRadius: 20, backgroundColor: "#fee2e2", justifyContent: "center", alignItems: "center" },
+  editButton: { width: 40, height: 40, borderRadius: 0, backgroundColor: "#dbeafe", justifyContent: "center", alignItems: "center" },
+  deleteButton: { width: 40, height: 40, borderRadius: 0, backgroundColor: "#dbeafe", justifyContent: "center", alignItems: "center" },
 });

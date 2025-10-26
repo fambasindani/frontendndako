@@ -238,7 +238,7 @@ function Card({ item, navigation }) {
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#f5f5f5", marginBottom:40},
   loader: { flex: 1, justifyContent: "center", alignItems: "center", position:"sticky" },
-  filterSection: { marginBottom: 20, backgroundColor: "#fff",paddingBottom:15, padding: 10, position:"relative", borderBottomColor:"gray", borderBottomWidth:0.20 },
+  filterSection: { marginBottom: 20, backgroundColor: "#e3e4e5",paddingBottom:15, padding: 10, position:"relative", borderBottomColor:"gray", borderBottomWidth:0.20 },
   title: { fontSize: 18, fontWeight: "bold", marginBottom: 10, color: "#0d2c6b" },
   buttonContainer: { flexDirection: "row" },
   filterButton: {
