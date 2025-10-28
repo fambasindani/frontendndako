@@ -188,8 +188,8 @@ export default function MonMenu(props) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#234270', borderBottomEndRadius:20,borderTopEndRadius:20, borderBottom:40,marginBottom:45,marginTop:100 },
-  logoContainer: { alignItems: 'center', justifyContent: 'center', paddingVertical: 30 },
+  container: { flex: 1, backgroundColor: '#234270', borderBottomEndRadius:20,borderTopEndRadius:20, borderBottom:40,marginBottom:45,marginTop:100,  paddingBlock:4},
+  logoContainer: { alignItems: 'center', justifyContent: 'center', paddingVertical: 0, },
   logo: { width: 70, height: 100, resizeMode: 'contain', marginBottom: 1 ,marginTop: 50 },
   title: { color: '#e9c162', fontSize: 18, fontWeight: 'bold' },
   separator: { height: 0.2, backgroundColor: 'white', marginHorizontal: 10, marginBottom: 20 },

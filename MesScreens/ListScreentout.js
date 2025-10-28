@@ -131,6 +131,7 @@ const ListScreentout = ({ navigation }) => {
       </TouchableOpacity>
 
       {/* 🔹 Filtres */}
+      
       <View style={styles.filterContainer}>
         {[
           { key: "location", label: "En location" },
@@ -180,7 +181,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Couleurs.background,
-    marginBottom: 30,
+    marginBottom: 40,
   },
   loader: {
     flex: 1,
@@ -206,7 +207,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     paddingHorizontal: 16,
     paddingVertical: 12,
-    backgroundColor: Couleurs.white,
+    backgroundColor: "#e2e2e2",
     gap: 8,
   },
   filterButton: {

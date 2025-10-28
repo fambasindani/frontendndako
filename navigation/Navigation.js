@@ -93,8 +93,8 @@ export default function Naviger() {
           options={{
             headerShown: true, // ✅ header visible
             title: 'Détails de la propriété',
-            headerStyle: { backgroundColor: '#0A1F44' },
-            headerTintColor: '#FFD700',
+            headerStyle: { backgroundColor: '#234270', },
+            headerTintColor: 'white',
             headerTitleAlign: 'center',
           }}
         />
@@ -105,8 +105,8 @@ export default function Naviger() {
           options={{
             headerShown: true, // ✅ header visible
             title: 'Liste Propriétés',
-            headerStyle: { backgroundColor: '#0A1F44' },
-            headerTintColor: '#FFD700',
+            headerStyle: { backgroundColor: '#234270' },
+            headerTintColor: 'white',
             headerTitleAlign: 'center',
           }}
         />
@@ -117,8 +117,8 @@ export default function Naviger() {
           options={{
             headerShown: true, // ✅ header visible
             title: 'Recherche Propriétés',
-            headerStyle: { backgroundColor: '#0A1F44' },
-            headerTintColor: '#FFD700',
+            headerStyle: { backgroundColor: '#234270' },
+            headerTintColor: 'white',
             headerTitleAlign: 'center',
           }}
         />
@@ -130,8 +130,8 @@ export default function Naviger() {
           options={{
             headerShown: true, // ✅ header visible
             title: 'Localisation',
-            headerStyle: { backgroundColor: '#0A1F44' },
-            headerTintColor: '#FFD700',
+            headerStyle: { backgroundColor: '#234270' },
+            headerTintColor: 'white',
             headerTitleAlign: 'center',
           }}
         />
@@ -142,8 +142,8 @@ export default function Naviger() {
           options={{
             headerShown: true, // ✅ header visible
             title: 'Resultat trouvé',
-            headerStyle: { backgroundColor: '#0A1F44' },
-            headerTintColor: '#FFD700',
+            headerStyle: { backgroundColor: '#234270' },
+            headerTintColor: 'white',
             headerTitleAlign: 'center',
           }}
         />
