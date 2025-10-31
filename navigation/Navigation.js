@@ -34,7 +34,7 @@ function createMenuStack(screen, title) {
     return (
       <Stack.Navigator
         screenOptions={{
-          headerStyle: { backgroundColor: '#234270', },
+          headerStyle: { backgroundColor: '#1b3b78', },
           headerTintColor: 'white',
           headerTitleStyle: { fontWeight: '0'},
           headerTitleAlign: 'center',
@@ -93,7 +93,7 @@ export default function Naviger() {
           options={{
             headerShown: true, // ✅ header visible
             title: 'Détails de la propriété',
-            headerStyle: { backgroundColor: '#234270', },
+            headerStyle: { backgroundColor: '#1b3b78', },
             headerTintColor: 'white',
             headerTitleAlign: 'center',
           }}
@@ -105,7 +105,7 @@ export default function Naviger() {
           options={{
             headerShown: true, // ✅ header visible
             title: 'Liste Propriétés',
-            headerStyle: { backgroundColor: '#234270' },
+            headerStyle: { backgroundColor: '#1b3b78' },
             headerTintColor: 'white',
             headerTitleAlign: 'center',
           }}
@@ -117,7 +117,7 @@ export default function Naviger() {
           options={{
             headerShown: true, // ✅ header visible
             title: 'Recherche Propriétés',
-            headerStyle: { backgroundColor: '#234270' },
+            headerStyle: { backgroundColor: '#1b3b78' },
             headerTintColor: 'white',
             headerTitleAlign: 'center',
           }}
@@ -130,7 +130,7 @@ export default function Naviger() {
           options={{
             headerShown: true, // ✅ header visible
             title: 'Localisation',
-            headerStyle: { backgroundColor: '#234270' },
+            headerStyle: { backgroundColor: '#1b3b78' },
             headerTintColor: 'white',
             headerTitleAlign: 'center',
           }}
@@ -142,7 +142,7 @@ export default function Naviger() {
           options={{
             headerShown: true, // ✅ header visible
             title: 'Resultat trouvé',
-            headerStyle: { backgroundColor: '#234270' },
+            headerStyle: { backgroundColor: '#1b3b78' },
             headerTintColor: 'white',
             headerTitleAlign: 'center',
           }}

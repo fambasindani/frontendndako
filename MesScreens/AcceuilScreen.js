@@ -236,19 +236,20 @@ function Card({ item, navigation }) {
 
 // 🔹 Styles
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#f5f5f5", marginBottom:40},
+  container: { flex: 1, backgroundColor: "#f5f5f5", marginBottom:0},
   loader: { flex: 1, justifyContent: "center", alignItems: "center", position:"sticky" },
-  filterSection: { marginBottom: 20, backgroundColor: "#e3e4e5",paddingBottom:15, padding: 10, position:"relative", borderBottomColor:"gray", borderBottomWidth:0.20 },
-  title: { fontSize: 18, fontWeight: "bold", marginBottom: 10, color: "#0d2c6b" },
-  buttonContainer: { flexDirection: "row" },
+  filterSection: { marginBottom: 20, backgroundColor: "#babbbb",paddingBottom:15, padding: 10, position:"relative", borderTopColor:"black", borderTopWidth:2,borderBottomWidth:0.3 },
+  title: { fontSize: 14, fontWeight: "bold", marginBottom: 10, color: "#1b3b78", },
+  buttonContainer: { flexDirection: "row",  },
   filterButton: {
     backgroundColor: "white",
     borderRadius: 20,
-    borderWidth: 1,
-    borderColor: "#224270",
+    borderWidth: 1.1,
+    borderColor: "white",
     paddingVertical: 8,
     paddingHorizontal: 15,
-    marginRight: 8,
+    marginRight: 9,
+    
   },
   logo: { 
    
@@ -258,9 +259,9 @@ const styles = StyleSheet.create({
   
   },
 
-  filterButtonSelected: { backgroundColor: "#224270" },
-  filterButtonText: { color: "#224270", fontWeight: "bold" },
-  filterButtonTextSelected: { color: "white" },
+  filterButtonSelected: { backgroundColor: "#1b3b78" },
+  filterButtonText: { color: "#224270", fontWeight: "500" },
+  filterButtonTextSelected: { color: "white",},
   section: { marginBottom: 30 },
   header: {
     flexDirection: "row",
@@ -269,8 +270,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: 15,
     marginBottom: 10,
   },
-  sectionTitle: { fontSize: 18, fontWeight: "bold", color: "#0d2c6b" },
-  seeMore: { fontSize: 14, color: "#0d6efd", fontWeight: "600" },
+  sectionTitle: { fontSize: 18, fontWeight: "bold", color: "#1b3b78" },
+  seeMore: { fontSize: 14, color: "#1b3b78", fontWeight: "600" },
   card: {
     width: width * 0.55,
     marginRight: 12,
@@ -288,13 +289,15 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 8,
     left: 8,
-    backgroundColor: "#FFD580",
+    backgroundColor: "#eb545b",
     paddingHorizontal: 10,
     paddingVertical: 3,
-    borderRadius: 90,
+    borderRadius: 10,
+    
+    
     
   },
-  statusText: { fontSize: 12, fontWeight: "600" },
+  statusText: { fontSize: 12, fontWeight: "700" , color:"white"},
   cardBody: { padding: 10 },
   rowBetween: {
     flexDirection: "row",
@@ -302,7 +305,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 4,
   },
-  cardTitle: { fontSize: 16, fontWeight: "bold", color: "#222" },
+  cardTitle: { fontSize: 16, fontWeight: "bold", color: "#1b3b78" },
   price: { fontSize: 15, color: "red", fontWeight: "bold" },
   row: { flexDirection: "row", alignItems: "center", marginVertical: 2 },
   location: { fontSize: 12, marginLeft: 4, color: "#444" },

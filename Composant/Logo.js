@@ -28,7 +28,7 @@ const Logo = ({ size = "medium", showText = true, style }) => {
 
   return (
     <View style={[styles.container, style]}>
-      <Image source={require("../assets/KCI BLUE.png")} style={[styles.logo, getLogoSize()]} resizeMode="contain" />
+      <Image source={require("../assets/kimmoBLUE.png")} style={[styles.logo, getLogoSize()]} resizeMode="contain" />
     </View>
   )
 }
@@ -36,11 +36,21 @@ const Logo = ({ size = "medium", showText = true, style }) => {
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center", 
+    
+   
+ 
+   
+    
+    
   },
   logo: {
     marginBottom:1,
     marginTop:50,
+ 
+   
+   
+    
   },
   text: {
     fontWeight: "600",

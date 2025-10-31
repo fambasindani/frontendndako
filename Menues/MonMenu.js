@@ -58,7 +58,7 @@ export default function MonMenu(props) {
 
     {
       label: 'Ajouter une propriété',
-      icon: 'building',
+      icon: 'folder-plus',
       action: () => {
         if (!isConnected) {
           props.navigation.navigate('Connexion'); // non connecté → Login
@@ -79,7 +79,7 @@ export default function MonMenu(props) {
 
       {
       label: 'Propriétés',
-      icon: 'building',
+      icon: 'houzz',
       action: () => {
         if (!isConnected) {
           props.navigation.navigate('Connexion');
@@ -98,7 +98,7 @@ export default function MonMenu(props) {
 
      {
       label: 'Parametre',
-      icon: 'info-circle',
+      icon: 'tools',
       action: () => {
         props.navigation.navigate('Parametre');
       },
@@ -113,8 +113,8 @@ export default function MonMenu(props) {
     
 
    // { label: 'Agents', icon: 'users', screen: 'Agents' },
-    { label: 'Sécurité', icon: 'cubes', screen: 'Agences Immo' },
-   { label: 'Resultat trouvé', icon: 'cubes', screen: 'ListeFiltreScreen' },
+    { label: 'Sécurité', icon: 'shield-alt', screen: 'Agences Immo' },
+   { label: 'Resultat trouvé', icon: 'search-location', screen: 'ListeFiltreScreen' },
 
     // Connexion seulement si non connecté
     //  ...(!isConnected ? [{ label: 'Connexion', icon: 'user', screen: 'Connexion' }] : []),
@@ -158,7 +158,7 @@ export default function MonMenu(props) {
       <DrawerContentScrollView {...props} contentContainerStyle={styles.container}>
         {/* Logo + Titre */}
         <View style={styles.logoContainer}>
-          <Image source={require('../assets/KCI WHITE.png')} style={styles.logo} />
+          <Image source={require('../assets/kimmoWHITE.png')} style={styles.logo} />
           
         </View>
 
@@ -188,12 +188,13 @@ export default function MonMenu(props) {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: '#234270', borderBottomEndRadius:20,borderTopEndRadius:20, borderBottom:40,marginBottom:45,marginTop:100,  paddingBlock:4},
+  container: { flex: 1, backgroundColor: '#1b3b78', borderBottomEndRadius:10,borderTopEndRadius:10, borderBottom:10,marginBottom:0, paddingBlock:4},
   logoContainer: { alignItems: 'center', justifyContent: 'center', paddingVertical: 0, },
-  logo: { width: 70, height: 100, resizeMode: 'contain', marginBottom: 1 ,marginTop: 50 },
+  logo: { width: 100, height: 100, resizeMode: 'contain', marginBottom: 20 ,marginTop: 100 },
   title: { color: '#e9c162', fontSize: 18, fontWeight: 'bold' },
   separator: { height: 0.2, backgroundColor: 'white', marginHorizontal: 10, marginBottom: 20 },
   menuItem: { flexDirection: 'row', alignItems: 'center', paddingVertical: 15, paddingHorizontal: 20 },
   icon: { marginRight: 15,color: 'white', },
-  label: { color: '#e9c162', fontSize: 14, },
+  label: { color: 'white', fontSize: 14, },
+ 
 });
